@@ -9,9 +9,11 @@ app.set('view engine', 'handlebars');
 
 // Our mock array of projects
 var reviews = [{
-    title: 'Great Movie'
+    title: 'The Titanic',
+    review: 'Great movies makes me cry all the time.'
 }, {
-    title: 'Will See Again'
+    title: 'Good Will Hunting',
+    review: 'Excellent movie really represents culture.'
 }]
 
 app.get('/', (req,res) => {
