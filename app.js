@@ -14,13 +14,7 @@ var reviews = [{
     title: 'Will See Again'
 }]
 
-app.get('/', (req, res) => {
-    res.render('home', {
-        msg: 'Hello World'
-    })
-});
-
-app.get('/reviews', (req,res) => {
+app.get('/', (req,res) => {
     res.render('reviews-index', {
         reviews: reviews
     });
