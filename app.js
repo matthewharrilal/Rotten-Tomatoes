@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/reviews/:id', (req, res) => { // Lets make sure that we are understanding the flow of operations here
+app.get('/reviews/fetch/:id', (req, res) => { // Lets make sure that we are understanding the flow of operations here
     Review.findById(req.params.id).then((review) => { // Based off the id given in the paramters that we are getting from the request
         res.render('reviews-show', { // Render the reviews show template and pass the review object to the template to use
             review: review
@@ -43,13 +43,13 @@ app.get('/reviews/:id', (req, res) => { // Lets make sure that we are understand
 });
 
 app.get('/reviews/new', (req, res) => {
-    res.render('reviews-new', {})
+    res.render('reviews-new', {});
 });
 
 app.post('/reviews', (req, res) => { // We can get to this route due to the form's action request
     Review.create(req.body).then((review) => {
         console.log('Hello World');
-        res.redirect('/');
+        res.redirect('/reviews/fetch/' + review._id);
     }).catch(err => {
         console.log(err);
     });
