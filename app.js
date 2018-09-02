@@ -6,7 +6,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/rotten_potatoes", {
     useMongoClient: true
 });
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
 }));
@@ -39,6 +40,10 @@ app.get('/', (req, res) => {
 
 app.get('/reviews/new', (req, res) => {
     res.render('reviews-new', {})
+});
+
+app.post('/reviews', (req,res) => { // We can get to this route due to the form's action request
+    res.send(req.body);
 });
 
 app.listen(3000, () => {
