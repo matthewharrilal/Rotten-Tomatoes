@@ -15,22 +15,24 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-// Our mock array of projects
-var reviews = [{
-    title: 'The Titanic',
-    review: 'Great movies makes me cry all the time.'
-}, {
-    title: 'Good Will Hunting',
-    review: 'Excellent movie really represents culture.'
-}]
-
 // Creating our model
 const Review = mongoose.model('Review', {
-    title: String
+    title: String,
+    description: String
 })
 
 
 app.get('/', (req, res) => {
+    Review.find().then(reviews => {
+        res.render('reviews-index', {
+            reviews: reviews
+        });
+    }).catch(err => {
+        console.log(err);
+    });
+});
+
+app.get('/example', (req, res) => {
     Review.find().then(reviews => {
         res.render('reviews-index', {
             reviews: reviews
