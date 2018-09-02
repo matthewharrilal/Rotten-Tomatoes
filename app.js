@@ -3,7 +3,9 @@ const app = express()
 var exphbs = require('express-handlebars')
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/rotten_potatoes");
+mongoose.connect("mongodb://localhost:27017/rotten_potatoes", {
+    useMongoClient: true
+});
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
@@ -19,10 +21,19 @@ var reviews = [{
     review: 'Excellent movie really represents culture.'
 }]
 
+// Creating our model
+const Review = mongoose.model('Review', {
+    title: String
+})
 
-app.get('/', (req,res) => {
-    res.render('reviews-index', {
-        reviews: reviews
+
+app.get('/', (req, res) => {
+    Review.find().then(reviews => {
+        res.render('reviews-index', {
+            reviews: reviews
+        });
+    }).catch(err => {
+        console.log(err);
     });
 });
 
