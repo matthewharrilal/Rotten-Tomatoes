@@ -19,6 +19,7 @@ var reviews = [{
     review: 'Excellent movie really represents culture.'
 }]
 
+
 app.get('/', (req,res) => {
     res.render('reviews-index', {
         reviews: reviews
