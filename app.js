@@ -32,11 +32,11 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/example', (req, res) => {
-    Review.find().then(reviews => {
-        res.render('reviews-index', {
-            reviews: reviews
-        });
+app.get('/reviews/:id', (req, res) => { // Lets make sure that we are understanding the flow of operations here
+    Review.findById(req.params.id).then((review) => { // Based off the id given in the paramters that we are getting from the request
+        res.render('reviews-show', { // Render the reviews show template and pass the review object to the template to use
+            review: review
+        })
     }).catch(err => {
         console.log(err);
     });
