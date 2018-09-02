@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express()
 var exphbs = require('express-handlebars')
+var mongoose = require('mongoose')
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost:27017/rotten_potatoes");
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
