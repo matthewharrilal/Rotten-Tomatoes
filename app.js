@@ -55,6 +55,12 @@ app.post('/reviews', (req, res) => { // We can get to this route due to the form
     });
 });
 
+// Edit
+app.get('/reviews/fetch/:id/edit', function(req, res) {
+    Review.findById(req.params.id, function(err, review) {
+        res.render('reviews-edit', {review: review})
+    })
+})
 app.listen(3000, () => {
     console.log('Listening on port 3000')
 });
